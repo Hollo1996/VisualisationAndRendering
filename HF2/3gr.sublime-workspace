@@ -1,0 +1,746 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"assemble",
+				"assembleWeb"
+			],
+			[
+				"WebGL",
+				"WebGLRenderingContext"
+			],
+			[
+				"unifom",
+				"uniforms"
+			],
+			[
+				"nDoiL",
+				"nDoiLayers"
+			],
+			[
+				"nd",
+				"nDoiLayers"
+			],
+			[
+				"nDoi",
+				"nDoiLayers"
+			],
+			[
+				"model",
+				"modelMatrix"
+			],
+			[
+				"to",
+				"torque"
+			],
+			[
+				"side",
+				"sideThrust"
+			],
+			[
+				"focu",
+				"focusValue"
+			],
+			[
+				"pro",
+				"solidProgram"
+			],
+			[
+				"setUni",
+				"setUnitSphere"
+			],
+			[
+				"normal",
+				"normalize"
+			],
+			[
+				"n_po",
+				"n_points"
+			],
+			[
+				"high",
+				"highEdge"
+			],
+			[
+				"New",
+				"newVertex"
+			],
+			[
+				"n",
+				"nNodes"
+			],
+			[
+				"node",
+				"nodeQTexture"
+			],
+			[
+				"rigg",
+				"riggingTexture"
+			],
+			[
+				"skel",
+				"skeletonTexture"
+			],
+			[
+				"chan",
+				"channel"
+			],
+			[
+				"chann",
+				"channels"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"ve",
+				"vertices"
+			],
+			[
+				"verifyEdgeFacePo",
+				"verifyEdgeFacePoints"
+			],
+			[
+				"verifyEdgeFaceP",
+				"verifyEdgeFacePoints"
+			],
+			[
+				"face",
+				"faceToEdge"
+			],
+			[
+				"sele",
+				"selectionDepth"
+			],
+			[
+				"m",
+				"movementX"
+			],
+			[
+				"key",
+				"keysPressed"
+			],
+			[
+				"mode",
+				"modes"
+			],
+			[
+				"clin",
+				"clientY"
+			],
+			[
+				"clinet",
+				"clientX"
+			],
+			[
+				"gl",
+				"gl_InstanceId"
+			],
+			[
+				"pos",
+				"points"
+			],
+			[
+				"ima",
+				"imageData"
+			],
+			[
+				"line",
+				"lineStart"
+			],
+			[
+				"verte",
+				"vertexAttribPointer"
+			],
+			[
+				"nre",
+				"nrepNormalBuffer"
+			],
+			[
+				"vertex",
+				"vertexData"
+			],
+			[
+				"no",
+				"normalsMaterial"
+			],
+			[
+				"world",
+				"worldNormal"
+			],
+			[
+				"s",
+				"sourceFileName"
+			],
+			[
+				"ang",
+				"angularDrag"
+			],
+			[
+				"drag",
+				"backDrag"
+			],
+			[
+				"GAME",
+				"GAMEPAD_KEY_RX"
+			],
+			[
+				"blade",
+				"bladeMaterial"
+			],
+			[
+				"main",
+				"mainRotationAxis"
+			],
+			[
+				"helim",
+				"heliMesh"
+			],
+			[
+				"rotor",
+				"rotorMesh"
+			],
+			[
+				"Texture",
+				"Texture2D"
+			],
+			[
+				"Game",
+				"GameObject"
+			],
+			[
+				"slow",
+				"slowpokeMaterials"
+			],
+			[
+				"indi",
+				"indices"
+			],
+			[
+				"index",
+				"indexCount"
+			],
+			[
+				"block",
+				"blockName"
+			],
+			[
+				"source",
+				"sourceStruct"
+			],
+			[
+				"uniform",
+				"uniformName"
+			],
+			[
+				"unifor",
+				"uniforms"
+			],
+			[
+				"nor",
+				"normalize"
+			],
+			[
+				"angularMo",
+				"angularMomentum"
+			],
+			[
+				"mome",
+				"momentum"
+			],
+			[
+				"sample",
+				"sampleSchlick"
+			],
+			[
+				"trace",
+				"traceObject"
+			],
+			[
+				"transl",
+				"translate"
+			],
+			[
+				"set",
+				"setRandom"
+			],
+			[
+				"angu",
+				"angularMomentum"
+			],
+			[
+				"mom",
+				"momentum"
+			],
+			[
+				"pla",
+				"playerId"
+			],
+			[
+				"player",
+				"addPlayer"
+			],
+			[
+				"avatar",
+				"avatarIndices"
+			],
+			[
+				"objec",
+				"objects"
+			],
+			[
+				"is",
+				"isAvatar"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"positio",
+				"positions"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"client",
+				"clientId"
+			],
+			[
+				"object",
+				"objectCount"
+			],
+			[
+				"modelM",
+				"modelMatrix"
+			],
+			[
+				"sNo",
+				"snoiseGrad"
+			],
+			[
+				"type",
+				"typeNames"
+			],
+			[
+				"Mat4",
+				"Mat4Array"
+			],
+			[
+				"Vec4A",
+				"Vec4Array"
+			],
+			[
+				"Vec1",
+				"Vec1Array"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"uni",
+				"uniformLocation"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 81.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"epxo",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"expo",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"exp",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"kotlin",
+				"Package Control: Install Package"
+			],
+			[
+				"e",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"syntax",
+				"SyntaxFold: Open README"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"form",
+				"Format: Javascript"
+			],
+			[
+				"fora",
+				"Format: Javascript"
+			],
+			[
+				"compa",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"com",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"compare to vi",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"sublim",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"comp",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"ex",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"count",
+				"LaTeXWordCount: Word Count"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"lintin",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Install Package Control"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src"
+	],
+	"file_history":
+	[
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/TexturedQuadGeometry.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/App.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/PerspectiveCamera.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/build.gradle",
+		"/D/Education/3gr/Bme3grKotlin/ufo120_SphereTracing/content/shaders/quad-vs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/ufo120_SphereTracing/content/shaders/trace-fs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/web/index.html",
+		"/D/Education/Graph/AitCg2020/AitCG320_PerspectiveCamera/js/PerspectiveCamera.js",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/Scene.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/OrthoCamera.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/Program.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/build.gradle",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/PerspectiveCamera.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/App.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/GameObject.kt",
+		"/D/Education/Ufo/webgl2019/000_initial/js/PerspectiveCamera.js",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/TexturedProgram.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/Material.kt",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/content/shaders/quad-vs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/content/shaders/trace-fs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/content/shaders/quad_vs.essl",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/content/shaders/trace_fs.essl",
+		"/D/Education/3gr/Bme3grKotlin/ufo110_initial/src/Shader.kt",
+		"/D/Education/Graph/AitCg2020/AitCG070_GOM/js/shaders/trafo-vs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/web/index.html",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/Mesh.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/Material.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/web/shaders/striped-fs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/web/shaders/trafo-vs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/settings.gradle",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/build.gradle",
+		"/D/Education/Graph/AitCg2020/AitCG070_GOM/js/Scene.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/OrthoCamera.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/Program.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/QuadGeometry.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/src/TriangleGeometry.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/settings.gradle",
+		"/D/Education/3gr/Bme3grWebGL/010_webgl/js/keycodes.js",
+		"/D/Education/3gr/Bme3grDirect3d/Egg3gr.fin/Projects/gr007-Character/fx/main.fx",
+		"/D/Education/3gr/Bme3grKotlin/3gr210_GOM/web/shaders/solid-fs.glsl",
+		"/D/Education/Graph/AitCg2020/AitCG053 - HW - Shapes and Patterns/ShapesAndPatterns.txt",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/lib/WebGLMath.js",
+		"/D/Education/3gr/Bme3grWebGL/020_gom/js/Scene.js",
+		"/D/Education/3gr/Bme3grDirect3d/Egg3gr.fin/Projects/gr007-Character/Game.h",
+		"/D/Education/3gr/rebasetest/dummy.txt",
+		"/D/Education/3gr/Bme3grDirect3d/Egg3gr.fin/Projects/gr007-Character/Game.cpp",
+		"/D/Education/Graph/AitCg2020/AitCG000_initial/index.html",
+		"/D/Education/Graph/AitCg2020/AitCG070_GOM/js/TriangleGeometry.js",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/src/UniformProvider.kt",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/build.gradle",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/src/ProgramReflection.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/WebGL2RenderingContext.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/.gitignore",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/gradlew",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/gradlew.bat",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/WebGLMath.sublime-project",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/gradlew",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/gradlew.bat",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath-Kotlin/settings.gradle",
+		"/D/Media/Travel/k.tex",
+		"/D/Education/Graph/AitCg2020/AitCG_TEST/index.html",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath/WebGLMath.sublime-project",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath/.sublime-project.sublime-project",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath/settings.gradle",
+		"/D/Education/3gr/Bme3grKotlin/WebGLMath/build.gradle",
+		"/D/Education/Graph/AitCg2020/AitCG020_WebGL/js/shaders/solid-fs.glsl",
+		"/D/Education/Graph/AitCg2020/AitCG020_WebGL/js/shaders/idle-vs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/web/shaders/idle-vs.glsl",
+		"/C/Users/Laci/AppData/Roaming/Sublime Text 3/Packages/User/gradle.sublime-build",
+		"/D/Education/3gr/Bme3grKotlin/3gr010_Browser/src/App.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/App.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/Scene.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr010_Browser/src/Scene.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/Scene.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/WebGL2RenderingContext.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/TriangleGeometry.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/Shader.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/Program.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/KeyNames.kt",
+		"/D/Media/Creative/b2020/b2020.txt",
+		"/D/Projects/2020_charflow/cescg/wait2020meta.tex",
+		"/D/Projects/2020_charflow/WAIT/WAIT_V/wait2020Sample.tex",
+		"/D/Projects/2020_charflow/WAIT/WAIT_A/wait2020Sample.tex",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/.gitignore",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/build.gradle",
+		"/C/Users/Laci/IdeaProjects/KoWGL/build.gradle",
+		"/D/Education/Graph/AitCg2020/AitCG315_Mesh3/js/MultiMesh3.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/Shader.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/web/shaders/solid-fs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/Program.kt",
+		"/D/Education/Graph/AitCg2020/AitCG090_Texture/js/Texture2D.js",
+		"/D/Education/Graph/AitCg2020/AitCG010_Browser/js/App.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/ShaderProgram.kt.old",
+		"/D/Education/Graph/AitCg2020/AitCG000_initial/js/keyNames.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/Game.kt",
+		"/D/Education/Graph/AitCg2020/AitCG000_initial/js/App.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/web/index.html",
+		"/C/Users/Laci/IdeaProjects/KoWGL/src/App.kt",
+		"/C/Users/Laci/IdeaProjects/KoWGL/gradle.properties",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/shaders/solid-fs.glsl",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/src/shaders/idle-vs.glsl",
+		"/D/Education/Graph/AitCg2020/AitCG020_WebGL/js/App.js",
+		"/D/Education/3gr/Bme3grKotlin/3gr020_WebGL/web/index.html",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/ShaderProgramMesh.kt",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/src/Keys.kt",
+		"/D/Education/3gr/Bme3grWebGL/000_initial/js/App.js",
+		"/C/Users/Laci/IdeaProjects/KoWGL/src/main/resources/index.html",
+		"/C/Users/Laci/IdeaProjects/KoWGL/gradlew.bat",
+		"/D/Education/3gr/Bme3grKotlin/3gr000_initial/gradlew.bat",
+		"/D/Education/Kode2/kode2/src/Application.kt",
+		"/D/Education/kode4/src/WsClientApp.kt",
+		"/D/Education/kode4/build.gradle",
+		"/D/Education/Kode2/kode2/build.gradle",
+		"/D/Education/Graph/ait/homework/sub2019.2/dudley4/js/Scene.js",
+		"/D/Install/DEPENDENCY_VERSIONS (5).txt",
+		"/D/Install/DEPENDENCY_VERSIONS (4).txt",
+		"/D/Install/DEPENDENCY_VERSIONS (3).txt",
+		"/D/Install/DEPENDENCY_VERSIONS (2).txt",
+		"/D/Install/DEPENDENCY_VERSIONS (1).txt",
+		"/D/Education/kode4/src/Application.kt",
+		"/D/Education/ktor-session-auth-example/src/Constants.kt",
+		"/D/Education/ktor-session-auth-example/src/Application.kt",
+		"/D/Education/Graph/ait/homework/final_proj_idea.txt",
+		"/D/Education/Graph/ait/homework/sub2019.2/dudley4/js/shaders/trace-fs.glsl",
+		"/D/Install/ftplist.txt",
+		"/D/Install/DEPENDENCY_VERSIONS.txt",
+		"/D/Install/DEPENDENCY_VERSIONS (6).txt",
+		"/D/Install/DEPENDENCY_VERSIONS (7).txt"
+	],
+	"find":
+	{
+		"height": 68.0
+	},
+	"find_in_files":
+	{
+		"height": 187.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"keysPressed[\"",
+			"keysPressed.",
+			"this.",
+			"const",
+			"yaw",
+			";",
+			"new",
+			";",
+			"this.",
+			"gettech"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 59.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 308.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Gradle",
+	"project": "3gr.sublime-project",
+	"replace":
+	{
+		"height": 114.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
