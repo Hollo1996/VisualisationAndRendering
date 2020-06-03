@@ -734,6 +734,7 @@ if (typeof kotlin === 'undefined') {
     UniformProvider.call(this, ['quadrics[' + id + ']']);
     this.surface_tye46u$_0 = (new QuadraticMat4()).provideDelegate_hr34ju$(this, Quadric$surface_metadata);
     this.clipper_u3dzq$_0 = (new QuadraticMat4()).provideDelegate_hr34ju$(this, Quadric$clipper_metadata);
+    this.kd_eov8ko$_0 = Vec4_init(1.0, 1.0, 1.0, 0.0).provideDelegate_hr34ju$(this, Quadric$kd_metadata);
     this.addComponentsAndGatherUniforms_inpnaw$(programs.slice());
   }
   var Quadric$surface_metadata = new PropertyMetadata('surface');
@@ -748,17 +749,27 @@ if (typeof kotlin === 'undefined') {
       return this.clipper_u3dzq$_0.getValue_hr34ju$(this, Quadric$clipper_metadata);
     }
   });
+  var Quadric$kd_metadata = new PropertyMetadata('kd');
+  Object.defineProperty(Quadric.prototype, 'kd', {
+    get: function () {
+      return this.kd_eov8ko$_0.getValue_hr34ju$(this, Quadric$kd_metadata);
+    }
+  });
   function Quadric$Companion() {
     Quadric$Companion_instance = this;
     this.sphere = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
-    this.paraboloid = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
-    this.hyperbolicParaboloid = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
-    this.hyperboloidOfOneSheet = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
-    this.hyperboloidOfTwoSheets = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0]));
-    this.cone = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
-    this.cylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
-    this.hyperbolicCylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
-    this.parabolicCylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
+    this.paraboloid = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0]));
+    this.hyperbolicParaboloid = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]));
+    this.hyperboloidOfOneSheet = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.hyperboloidOfTwoSheets = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]));
+    this.cone = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
+    this.cylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.hyperbolicCylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.parabolicCylinder = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]));
+    this.doublePlanesX = QuadraticMat4_init(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.origoPlanesY = QuadraticMat4_init(new Float32Array([0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.origoPlanesZ = QuadraticMat4_init(new Float32Array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0]));
+    this.none = QuadraticMat4_init(new Float32Array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
   }
   Quadric$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -815,19 +826,55 @@ if (typeof kotlin === 'undefined') {
     this.timeAtFirstFrame = (new Date()).getTime();
     this.timeAtLastFrame = this.timeAtFirstFrame;
     this.camera = new PerspectiveCamera(Program$Companion_getInstance().all.slice());
-    var array = Array_0(1);
+    var array = Array_0(3);
     var tmp$;
     tmp$ = array.length - 1 | 0;
     for (var i = 0; i <= tmp$; i++) {
       array[i] = new Quadric(i, Program$Companion_getInstance().all.slice());
     }
     this.quadrics = array;
-    this.quadrics[0].surface.set_8cqhcw$(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0]));
-    this.quadrics[0].surface.translate_y2kzbl$(0.0, 1.0, 0.0);
-    this.quadrics[0].clipper.set_8cqhcw$(new Float32Array([0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0]));
-    this.quadrics[0].clipper.translate_y2kzbl$(0.0, 1.0, 0.0);
+    this.quadrics[0].surface.set_6yyfpw$(Quadric$Companion_getInstance().origoPlanesY);
+    this.quadrics[0].surface.translate_y2kzbl$(0.0, -2.0, 0.0);
+    this.quadrics[0].clipper.set_6yyfpw$(Quadric$Companion_getInstance().none);
+    this.quadrics[1].surface.set_6yyfpw$(Quadric$Companion_getInstance().hyperbolicParaboloid);
+    this.quadrics[1].surface.translate_y2kzbl$(0.0, 1.1, 0.0);
+    this.quadrics[1].clipper.set_6yyfpw$(Quadric$Companion_getInstance().sphere);
+    this.quadrics[1].clipper.scale_y2kzbl$(2.0, 2.0, 2.0);
+    this.quadrics[1].clipper.translate_y2kzbl$(0.0, 1.1, 0.0);
+    this.quadrics[2].surface.set_6yyfpw$(Quadric$Companion_getInstance().sphere);
+    this.quadrics[2].surface.scale_y2kzbl$(2.0, 2.0, 2.0);
+    this.quadrics[2].surface.translate_y2kzbl$(0.0, 1.1, 0.0);
+    this.quadrics[2].clipper.set_6yyfpw$(Quadric$Companion_getInstance().hyperbolicParaboloid);
+    this.quadrics[2].clipper.scale_y2kzbl$(-1.0, 1.0, -1.0);
+    this.quadrics[2].clipper.translate_y2kzbl$(0.0, 1.1, 0.0);
+    var array_0 = Array_0(2);
+    var tmp$_0;
+    tmp$_0 = array_0.length - 1 | 0;
+    for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
+      array_0[i_0] = new Light(i_0, Program$Companion_getInstance().all.slice());
+    }
+    this.lights = array_0;
+    var $this = this.lights[0].position.set_8cqhcw$(new Float32Array([1.0, 1.0, -1.0, 0.0]));
+    var x = $this.storage[0] * $this.storage[0] + $this.storage[1] * $this.storage[1] + $this.storage[2] * $this.storage[2] + $this.storage[3] * $this.storage[3];
+    var l = Math_0.sqrt(x);
+    $this.storage[0] = $this.storage[0] / l;
+    $this.storage[1] = $this.storage[1] / l;
+    $this.storage[2] = $this.storage[2] / l;
+    $this.storage[3] = $this.storage[3] / l;
+    this.lights[0].powerDensity.set_8cqhcw$(new Float32Array([0.0, 1.0, 0.0]));
+    this.lights[1].position.set_8cqhcw$(new Float32Array([-1.0, 10.0, 1.0, 1.0]));
+    this.lights[1].powerDensity.set_8cqhcw$(new Float32Array([1.0, 0.0, 100.0]));
+    this.envTexture = new TextureCube(this.gl, ['media/posx.jpg', 'media/negx.jpg', 'media/posy.jpg', 'media/negy.jpg', 'media/posz.jpg', 'media/negz.jpg']);
+    this.env_4eq4ep$_0 = (new SamplerCube()).provideDelegate_hr34ju$(this, Scene$env_metadata);
+    this.env.set_xwoe53$(this.envTexture, []);
     this.addComponentsAndGatherUniforms_inpnaw$(Program$Companion_getInstance().all.slice());
   }
+  var Scene$env_metadata = new PropertyMetadata('env');
+  Object.defineProperty(Scene.prototype, 'env', {
+    get: function () {
+      return this.env_4eq4ep$_0.getValue_hr34ju$(this, Scene$env_metadata);
+    }
+  });
   Scene.prototype.resize_smaims$ = function (gl, canvas) {
     gl.viewport(0, 0, canvas.width, canvas.height);
     this.camera.setAspectRatio_mx4ult$(canvas.width / canvas.height);
@@ -841,7 +888,7 @@ if (typeof kotlin === 'undefined') {
     gl.clearColor(0.7, 0.0, 0.3, 1.0);
     gl.clearDepth(1.0);
     gl.clear(WebGLRenderingContext.COLOR_BUFFER_BIT | WebGLRenderingContext.DEPTH_BUFFER_BIT);
-    this.traceProgram.draw_a4auz3$([this, this.camera].concat(this.quadrics));
+    this.traceProgram.draw_a4auz3$([this, this.camera].concat(this.quadrics, this.lights));
     this.quadGeometry.draw();
   };
   Scene.$metadata$ = {

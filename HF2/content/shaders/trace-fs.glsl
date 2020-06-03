@@ -19,8 +19,9 @@ in vec4 rayDir;
 out vec4 fragmentColor;
 
 uniform struct {
-  sampler3D volume;
-  sampler2D matcap;
+  //sampler3D volume;
+  //sampler2D matcap;
+  samplerCube env;
 } scene;
 
 uniform struct {
@@ -29,80 +30,18 @@ uniform struct {
   float mode;
 } camera;
 
-const int quadraticCount=1;
+const int quadraticCount=3;
 uniform struct {
   mat4 surface;
   mat4 clipper;
+  vec4 kd;
 } quadrics[quadraticCount];
 
-//COUNT OF VEXELS ON ONE AXIS OF CUBIC 3D TEXTURE
-const int texSize = 256;
-//SIZE OF VEXEL
-const float vexelDistance = 1.0f / 256.0f;
-
-//PHONG
-//POSITION OF POINT LIGHT
-const vec3 lightPos = vec3(3,3,3);
-//COLORS
-const vec3 ambientCol = vec3(0.1,0.1,0.1);
-const vec3 diffCol = vec3(1.0,0.8431,0.0);
-const vec3 specCol = vec3(6.0,6.0,6.0);
-//CONSTANTS
-const float ambRef = 0.3;
-const float diffRef = 0.7;
-const float specRef = 0.7;
-const float shininess = 8.0;
-
-//SHADOW MARCHING CONSTANTS
-float stepLength = vexelDistance * 2.0f;
-int limit = texSize * 2;
-
-//ONION LEVELS
-const float levelStep = 0.2;
-vec3 surfaceCols[3];
-
-//COLOR OF BACKGROUND
-const vec4 backGroundCol = vec4(0.5,0.5,0.5,1);
-
-
-
-//CALCULATION OF NIEREST INTERSECTION WITH A CUBE PARALELL WITH ALL AXIS
-vec3 intersectBox(vec3 startPos, vec3 rayDir, bool enter){
-
-  //MULTIPLYER OF RAY DIRECTION TO INTERSECTION
-  float times[3];
-  vec3 intersections[3];
-
-  for(int i=0; i<3; i++){
-    if(  (rayDir[i] > 0.0f && enter)
-      || (rayDir[i] <= 0.0f && !enter) )
-      times[i] = (0.0f - startPos[i]) / rayDir[i];
-    else
-      times[i] = (1.0f - startPos[i]) / rayDir[i];
-    intersections[i] = startPos + rayDir * times[i];
-  }
-
-  //INDEX OF SIDE WITH INTERSECTION OF MINIMAL DISTANCE
-  vec3 intersection = startPos;
-  float time = 1000000.0;
-  for(int i=0; i<3; i++){    
-      //IS THE EXISTING INTERSECTION BETTER THAN PREVIOUS AND ON THE SIDE
-    if(times[i] < time ){
-      int ixCoord1 = (i + 1) % 3;
-      int ixCoord2 = (i + 2) % 3;
-      if(  intersections[i][ixCoord1] >= 0.0f
-        && intersections[i][ixCoord1] <= 1.0f
-        && intersections[i][ixCoord2] >= 0.0f
-        && intersections[i][ixCoord2] <= 1.0f
-        ){
-          time = times[i];
-          intersection = intersections[i];
-        }
-    }
-  }
-  
-  return intersection;
-}
+const int lightCount=2;
+uniform struct {
+  vec4 position; //dir -> w=0.0f, pos -> w=1.0f
+  vec3 powerDensity;
+} lights[lightCount];
 
 float intersectQadric(vec4 e, vec4 d, mat4 coeff, mat4 clipper){
   float a = dot(d*coeff,d);
@@ -111,35 +50,68 @@ float intersectQadric(vec4 e, vec4 d, mat4 coeff, mat4 clipper){
 
   float disc = b*b - 4.0 * a * c;
   if(disc < 0.0)
-    return -1.0;
+    return -1.0f;
 
-  float t1 = (-b - sqrt(disc)) / (2.0 * a);
-  float t2 = (-b + sqrt(disc)) / (2.0 * a);
+  float t1 = (-b - sqrt(disc)) / (2.0f * a);
+  float t2 = (-b + sqrt(disc)) / (2.0f * a);
 
   vec4 h1 = e+d*t1;
   vec4 h2 = e+d*t2;
 
   if(dot(h1*clipper,h1) > 0.0)
-    t1=-1.0;
+    t1=-1.0f;
   if(dot(h2*clipper,h2) > 0.0)
-    t2=-1.0;
+    t2=-1.0f;
 
   return (t1 < 0.0) ? t2 : (t2 < 0.0 ? t1 : min(t1,t2));
 }
 
-vec2 findBestHit(vec4 e, vec4 d){
-  float time= -1.0f;
-  int index = -1;
+struct Hit {
+  float time;
+  int index;
+};
+
+Hit findBestHit(vec4 e, vec4 d){
+  Hit h;
+  h.time= -1.0f;
+  h.index = -1;
   for(int i = 0; i < quadraticCount; i++){
-    float actualTime = intersectQadric(e,d,quadrics[i].surface,quadrics[i].clipper);
-    if(actualTime > 0.0f && (actualTime < time || time == -1.0 )){
-      time = actualTime;
-      index = i;
+    float actualTime = 
+      intersectQadric(e,d,quadrics[i].surface,quadrics[i].clipper);
+    if(actualTime > 0.0f && (actualTime < h.time || h.time < 0.0 )){
+      h.time = actualTime;
+      h.index = i;
     }
   }
 
-  return vec2( time, float(index) );
+  return h;
   
+}
+
+vec3 getQuadraticNormal(mat4 coeff, vec4 hit){
+  return normalize((hit*coeff + coeff*hit).xyz);
+}
+
+vec3 shade(vec3 normal, vec3 viewDir, vec3 lightDir,vec3 powerDensity, vec3 kd){
+  vec3 halfway = normalize(viewDir + lightDir);
+  float cosa = max(dot(normal,lightDir),0.0f);
+  float cosb = max(dot(normal,viewDir),0.0f);
+  return powerDensity * kd * cosa
+    + 
+    powerDensity * vec3(3,3,3) * pow(max(dot(halfway, normal),0.0f),25.0f) * cosa / max(cosa, cosb);
+}
+
+vec3 directLighting(vec4 pos, vec3 normal, vec3 viewDir, vec3 kd){
+  vec3 radiance;
+  for(int i=0;i<lightCount;i++){
+    vec3 lightDiff = lights[i].position.xyz - pos.xyz * lights[i].position.w;
+    vec3 lightDir = normalize(lightDiff);
+    vec3 powerDensity = lights[i].powerDensity.xyz / dot(lightDiff,lightDiff);
+    Hit shadowHit = findBestHit(pos + vec4(normal,0) * 0.01f,vec4(lightDir,0));
+    if(shadowHit.time < 0.0f)
+      radiance += shade(normal, viewDir, lightDir, powerDensity, kd);
+  }  
+  return radiance;
 }
 
 void main(void) {
@@ -147,22 +119,36 @@ void main(void) {
   vec4 d = vec4(normalize(rayDir.xyz),0);
   vec4 e = vec4(camera.position.xyz,1);
 
-  vec3 radience = vec3(0,0,0);
 
-  
-  vec2 best = findBestHit(e, d);
-  float t = best.x;
-  int index = int(best.y); 
+  vec3 radiance = vec3(0,0,0);
+  vec3 reflectanceProduct=vec3(1,1,1);
 
-  if(t > 0.0) {
-    vec4 hit = e + d * t;
-    vec4 grad = hit * quadrics[0].surface + quadrics[0].surface * hit;
-    vec3 norm = normalize(grad.xyz);
-    radience = norm; 
+  for(int iBounce=0; iBounce < 6; iBounce++){
+    Hit best = findBestHit(e, d);
+    if(best.time > 0.0) {
+      vec4 hit = e + d * best.time;
+      vec3 normal = getQuadraticNormal(quadrics[best.index].surface, hit);
+      if(dot(normal,d.xyz)>0.0f)
+        normal = -normal;
+      radiance += reflectanceProduct * directLighting(hit, normal, -d.xyz, quadrics[best.index].kd.rgb);
+      reflectanceProduct *= 0.5f;
+      //reflectanceProduct *= quadrics[best.index].reflectance;
+      //reflectanceProduct *= reflectanceFromFrener; //szogfuggo, pl tukor
+      //kezeljuk a sugarat, mint fat
+      // d.xyz = refract(d.xyz, normal, mu);
+      //ha nulla vagy kissebb epsilon a refract, akkor reflect
+      d.xyz = reflect(d.xyz, normal);
+      //if() dot(normal, d.xyz) < 0.0) normal = -normal;
+      e = hit + vec4(normal,0) * 0.01; // refract eseten - vec4(normal,0) * 0.01, de egyszerubb a normalt szorozni -1-gyel
+      }
+    else{
+      radiance += reflectanceProduct * texture(scene.env, d.xyz).rgb;
+      break;
     }
-  else
-    radience = backGroundCol.xyz;
+    
+  }
 
 
-  fragmentColor = vec4(radience,1);
+
+  fragmentColor = vec4(radiance,1);
 }
