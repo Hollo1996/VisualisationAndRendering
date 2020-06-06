@@ -30,14 +30,23 @@ uniform struct {
   float mode;
 } camera;
 
-const int quadraticCount=3;
+const int quadraticCount=5;
 uniform struct {
   mat4 surface;
   mat4 clipper;
-  vec4 kd;
+  float materialIndex;
 } quadrics[quadraticCount];
 
-const int lightCount=2;
+const int materialCount=3;
+uniform struct {
+  vec3 kd;
+  vec3 ks;
+  vec3 indexOfRefraction;
+  vec3 extinctionCoefficient;
+  float shininess;
+} materials[materialCount];
+
+const int lightCount=3;
 uniform struct {
   vec4 position; //dir -> w=0.0f, pos -> w=1.0f
   vec3 powerDensity;
@@ -92,16 +101,17 @@ vec3 getQuadraticNormal(mat4 coeff, vec4 hit){
   return normalize((hit*coeff + coeff*hit).xyz);
 }
 
-vec3 shade(vec3 normal, vec3 viewDir, vec3 lightDir,vec3 powerDensity, vec3 kd){
+vec3 shade(vec3 normal, vec3 viewDir, vec3 lightDir,vec3 powerDensity, int materialIx){
   vec3 halfway = normalize(viewDir + lightDir);
   float cosa = max(dot(normal,lightDir),0.0f);
   float cosb = max(dot(normal,viewDir),0.0f);
-  return powerDensity * kd * cosa
-    + 
-    powerDensity * vec3(3,3,3) * pow(max(dot(halfway, normal),0.0f),25.0f) * cosa / max(cosa, cosb);
+  return  powerDensity * materials[materialIx].kd * cosa
+        + powerDensity * materials[materialIx].ks * cosa
+        * max(pow(dot(halfway, normal),materials[materialIx].shininess),0.0f)
+        / max(cosa, cosb);
 }
 
-vec3 directLighting(vec4 pos, vec3 normal, vec3 viewDir, vec3 kd){
+vec3 lighting(vec4 pos, vec3 normal, vec3 viewDir, int materialIx){
   vec3 radiance;
   for(int i=0;i<lightCount;i++){
     vec3 lightDiff = lights[i].position.xyz - pos.xyz * lights[i].position.w;
@@ -109,46 +119,102 @@ vec3 directLighting(vec4 pos, vec3 normal, vec3 viewDir, vec3 kd){
     vec3 powerDensity = lights[i].powerDensity.xyz / dot(lightDiff,lightDiff);
     Hit shadowHit = findBestHit(pos + vec4(normal,0) * 0.01f,vec4(lightDir,0));
     if(shadowHit.time < 0.0f)
-      radiance += shade(normal, viewDir, lightDir, powerDensity, kd);
+      radiance += shade(normal, viewDir, lightDir, powerDensity, materialIx);
   }  
   return radiance;
 }
 
+//Freshnel by sirmay's method
+vec3 fresnel(vec3 normal, vec3 inDir, int materialIx, bool reverseMu){
+  vec3 ior = materials[materialIx].indexOfRefraction;
+  if(reverseMu)
+    ior = vec3(1.0f/ior[0], 1.0f/ior[1], 1.0f/ior[2]);
+  vec3 extinction = materials[materialIx].extinctionCoefficient;
+
+  float mu = (ior[0]+ior[1]+ior[2])/3.0f;
+  float cosa = dot(-normal,refract(inDir,normal,mu));
+  vec3 ior_minus = ior - vec3(1.0f, 1.0f, 1.0f);
+  vec3 ior_plus =  ior + vec3(1.0f, 1.0f, 1.0f);
+  vec3 k2 = extinction * extinction;
+
+  return (  (ior_minus * ior_minus) + k2
+            + 4.0f * ior * pow(1.0f - cosa, 5.0f)
+          ) / ( ior_plus * ior_plus + k2 );
+}
+
+
+//Ray Casting process
+vec3 raycast(vec4 e, vec4 d){
+  const int depth = 4;
+  const int maxLeafCount = int(pow(2.0f,float(depth)));
+  vec3 extinction[maxLeafCount];
+  extinction[0] = vec3(1.0f, 1.0f, 1.0f);
+  vec4 positions[maxLeafCount];
+  positions[0] = e;
+  vec4 directions[maxLeafCount];
+  directions[0] = d;
+  vec3 radiance = vec3(0,0,0);
+  
+  for(int level=0; level < depth; level++){
+
+    for(int vertex = int(pow(2.0f,float(level))) - 1 ; vertex >= 0; vertex-- ){
+      if(extinction[vertex] == vec3(0.0,0.0,0.0)){
+        extinction[vertex * 2] = vec3(0.0,0.0,0.0);
+        extinction[vertex * 2 + 1] = vec3(0.0,0.0,0.0);
+        continue;
+      }
+      Hit best = findBestHit(positions[vertex], directions[vertex]);
+
+      if(best.time > 0.0){
+
+        vec4 hit = positions[vertex] + directions[vertex] * best.time;
+        vec3 normal = getQuadraticNormal(quadrics[best.index].surface, hit);
+        int materialIx = int(quadrics[best.index].materialIndex);
+        vec3 ior = materials[materialIx].indexOfRefraction;
+        float mu = (ior[0] + ior[1] + ior[2]) / 3.0f;
+        bool reversMu = false;
+        if(dot(normal, directions[vertex].xyz) > 0.0f){
+          normal = -normal;
+          mu = 1.0f / mu;
+          reversMu = true;
+        }
+
+        vec3 reflectance = fresnel(normal, directions[vertex].xyz, materialIx, reversMu);
+        vec3 transmitance = vec3(1.0f,1.0f,1.0f) - reflectance;
+        radiance += extinction[vertex] * lighting(hit, normal, -directions[vertex].xyz, materialIx);
+
+
+        extinction[2 * vertex + 1] = extinction[vertex] * transmitance;
+        directions[2 * vertex + 1].xyz = normalize(refract(directions[vertex].xyz, normal, mu ));
+        positions[2 * vertex + 1] = hit - vec4(normal,0) * 0.001;
+
+        if(length( materials[materialIx].kd) > 0.5f)
+          extinction[2 * vertex] = extinction[vertex] * materials[materialIx].ks;
+        else
+          extinction[2 * vertex] = extinction[vertex] * reflectance;
+        directions[2 * vertex].xyz = normalize(reflect(directions[vertex].xyz, normal));
+        positions[2 * vertex] = hit + vec4(normal,0) * 0.001;
+      
+      }
+      else{
+        radiance += extinction[vertex] * texture(scene.env, directions[vertex].xyz).rgb;
+        extinction[vertex * 2] = vec3(0.0,0.0,0.0);
+        extinction[vertex * 2 + 1] = vec3(0.0,0.0,0.0);
+      }
+
+
+    }
+  }
+
+  return radiance;
+
+}
+
 void main(void) {
-  //INPUT DATA
   vec4 d = vec4(normalize(rayDir.xyz),0);
   vec4 e = vec4(camera.position.xyz,1);
 
-
-  vec3 radiance = vec3(0,0,0);
-  vec3 reflectanceProduct=vec3(1,1,1);
-
-  for(int iBounce=0; iBounce < 6; iBounce++){
-    Hit best = findBestHit(e, d);
-    if(best.time > 0.0) {
-      vec4 hit = e + d * best.time;
-      vec3 normal = getQuadraticNormal(quadrics[best.index].surface, hit);
-      if(dot(normal,d.xyz)>0.0f)
-        normal = -normal;
-      radiance += reflectanceProduct * directLighting(hit, normal, -d.xyz, quadrics[best.index].kd.rgb);
-      reflectanceProduct *= 0.5f;
-      //reflectanceProduct *= quadrics[best.index].reflectance;
-      //reflectanceProduct *= reflectanceFromFrener; //szogfuggo, pl tukor
-      //kezeljuk a sugarat, mint fat
-      // d.xyz = refract(d.xyz, normal, mu);
-      //ha nulla vagy kissebb epsilon a refract, akkor reflect
-      d.xyz = reflect(d.xyz, normal);
-      //if() dot(normal, d.xyz) < 0.0) normal = -normal;
-      e = hit + vec4(normal,0) * 0.01; // refract eseten - vec4(normal,0) * 0.01, de egyszerubb a normalt szorozni -1-gyel
-      }
-    else{
-      radiance += reflectanceProduct * texture(scene.env, d.xyz).rgb;
-      break;
-    }
-    
-  }
-
-
+  vec3 radiance = raycast(e, d);
 
   fragmentColor = vec4(radiance,1);
 }

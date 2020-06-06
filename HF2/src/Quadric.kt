@@ -1,5 +1,6 @@
 import vision.gears.webglmath.Mat4
 import vision.gears.webglmath.Vec4
+import vision.gears.webglmath.Vec1
 import vision.gears.webglmath.UniformProvider
 
 class Quadric(
@@ -9,7 +10,7 @@ class Quadric(
 
     val surface by QuadraticMat4()
     val clipper by QuadraticMat4()
-    val kd by Vec4(1.0f,1.0f,1.0f,0.0f)
+    val materialIndex by Vec1(0.0f)
 
   init{
     addComponentsAndGatherUniforms(*programs)

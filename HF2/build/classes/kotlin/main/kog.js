@@ -45,6 +45,8 @@ if (typeof kotlin === 'undefined') {
   UniformProvider.prototype.constructor = UniformProvider;
   Light.prototype = Object.create(UniformProvider.prototype);
   Light.prototype.constructor = Light;
+  Material.prototype = Object.create(UniformProvider.prototype);
+  Material.prototype.constructor = Material;
   OrthoCamera.prototype = Object.create(UniformProvider.prototype);
   OrthoCamera.prototype.constructor = OrthoCamera;
   PerspectiveCamera.prototype = Object.create(UniformProvider.prototype);
@@ -356,6 +358,50 @@ if (typeof kotlin === 'undefined') {
   Light.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Light',
+    interfaces: [UniformProvider]
+  };
+  function Material(id, programs) {
+    UniformProvider.call(this, ['materials[' + id + ']']);
+    this.kd_wafa5i$_0 = Vec3_init(1.0, 1.0, 1.0).provideDelegate_hr34ju$(this, Material$kd_metadata);
+    this.ks_waf9sl$_0 = Vec3_init(1.0, 1.0, 1.0).provideDelegate_hr34ju$(this, Material$ks_metadata);
+    this.indexOfRefraction_w7ikkj$_0 = Vec3_init(1.0, 1.0, 1.0).provideDelegate_hr34ju$(this, Material$indexOfRefraction_metadata);
+    this.extinctionCoefficient_xwvfk3$_0 = Vec3_init(0.5, 0.5, 0.5).provideDelegate_hr34ju$(this, Material$extinctionCoefficient_metadata);
+    this.shininess_3mvb5x$_0 = Vec1_init(1.0).provideDelegate_hr34ju$(this, Material$shininess_metadata);
+    this.addComponentsAndGatherUniforms_inpnaw$(programs.slice());
+  }
+  var Material$kd_metadata = new PropertyMetadata('kd');
+  Object.defineProperty(Material.prototype, 'kd', {
+    get: function () {
+      return this.kd_wafa5i$_0.getValue_hr34ju$(this, Material$kd_metadata);
+    }
+  });
+  var Material$ks_metadata = new PropertyMetadata('ks');
+  Object.defineProperty(Material.prototype, 'ks', {
+    get: function () {
+      return this.ks_waf9sl$_0.getValue_hr34ju$(this, Material$ks_metadata);
+    }
+  });
+  var Material$indexOfRefraction_metadata = new PropertyMetadata('indexOfRefraction');
+  Object.defineProperty(Material.prototype, 'indexOfRefraction', {
+    get: function () {
+      return this.indexOfRefraction_w7ikkj$_0.getValue_hr34ju$(this, Material$indexOfRefraction_metadata);
+    }
+  });
+  var Material$extinctionCoefficient_metadata = new PropertyMetadata('extinctionCoefficient');
+  Object.defineProperty(Material.prototype, 'extinctionCoefficient', {
+    get: function () {
+      return this.extinctionCoefficient_xwvfk3$_0.getValue_hr34ju$(this, Material$extinctionCoefficient_metadata);
+    }
+  });
+  var Material$shininess_metadata = new PropertyMetadata('shininess');
+  Object.defineProperty(Material.prototype, 'shininess', {
+    get: function () {
+      return this.shininess_3mvb5x$_0.getValue_hr34ju$(this, Material$shininess_metadata);
+    }
+  });
+  Material.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Material',
     interfaces: [UniformProvider]
   };
   function OrthoCamera(programs) {
@@ -734,7 +780,7 @@ if (typeof kotlin === 'undefined') {
     UniformProvider.call(this, ['quadrics[' + id + ']']);
     this.surface_tye46u$_0 = (new QuadraticMat4()).provideDelegate_hr34ju$(this, Quadric$surface_metadata);
     this.clipper_u3dzq$_0 = (new QuadraticMat4()).provideDelegate_hr34ju$(this, Quadric$clipper_metadata);
-    this.kd_eov8ko$_0 = Vec4_init(1.0, 1.0, 1.0, 0.0).provideDelegate_hr34ju$(this, Quadric$kd_metadata);
+    this.materialIndex_19xi88$_0 = Vec1_init(0.0).provideDelegate_hr34ju$(this, Quadric$materialIndex_metadata);
     this.addComponentsAndGatherUniforms_inpnaw$(programs.slice());
   }
   var Quadric$surface_metadata = new PropertyMetadata('surface');
@@ -749,10 +795,10 @@ if (typeof kotlin === 'undefined') {
       return this.clipper_u3dzq$_0.getValue_hr34ju$(this, Quadric$clipper_metadata);
     }
   });
-  var Quadric$kd_metadata = new PropertyMetadata('kd');
-  Object.defineProperty(Quadric.prototype, 'kd', {
+  var Quadric$materialIndex_metadata = new PropertyMetadata('materialIndex');
+  Object.defineProperty(Quadric.prototype, 'materialIndex', {
     get: function () {
-      return this.kd_eov8ko$_0.getValue_hr34ju$(this, Quadric$kd_metadata);
+      return this.materialIndex_19xi88$_0.getValue_hr34ju$(this, Quadric$materialIndex_metadata);
     }
   });
   function Quadric$Companion() {
@@ -826,7 +872,7 @@ if (typeof kotlin === 'undefined') {
     this.timeAtFirstFrame = (new Date()).getTime();
     this.timeAtLastFrame = this.timeAtFirstFrame;
     this.camera = new PerspectiveCamera(Program$Companion_getInstance().all.slice());
-    var array = Array_0(3);
+    var array = Array_0(5);
     var tmp$;
     tmp$ = array.length - 1 | 0;
     for (var i = 0; i <= tmp$; i++) {
@@ -836,18 +882,32 @@ if (typeof kotlin === 'undefined') {
     this.quadrics[0].surface.set_6yyfpw$(Quadric$Companion_getInstance().origoPlanesY);
     this.quadrics[0].surface.translate_y2kzbl$(0.0, -2.0, 0.0);
     this.quadrics[0].clipper.set_6yyfpw$(Quadric$Companion_getInstance().none);
-    this.quadrics[1].surface.set_6yyfpw$(Quadric$Companion_getInstance().hyperbolicParaboloid);
-    this.quadrics[1].surface.translate_y2kzbl$(0.0, 1.1, 0.0);
+    this.quadrics[0].materialIndex.set_8cqhcw$(new Float32Array([0.0]));
+    this.quadrics[1].surface.set_6yyfpw$(Quadric$Companion_getInstance().paraboloid);
+    this.quadrics[1].surface.scale_y2kzbl$(2.0, 2.0, 2.0);
+    this.quadrics[1].surface.translate_y2kzbl$(0.0, 2.0, 0.0);
     this.quadrics[1].clipper.set_6yyfpw$(Quadric$Companion_getInstance().sphere);
-    this.quadrics[1].clipper.scale_y2kzbl$(2.0, 2.0, 2.0);
-    this.quadrics[1].clipper.translate_y2kzbl$(0.0, 1.1, 0.0);
+    this.quadrics[1].clipper.scale_y2kzbl$(8.0, 8.0, 8.0);
+    this.quadrics[1].clipper.translate_y2kzbl$(0.0, 8.0, 0.0);
+    this.quadrics[1].materialIndex.set_8cqhcw$(new Float32Array([0.0]));
     this.quadrics[2].surface.set_6yyfpw$(Quadric$Companion_getInstance().sphere);
     this.quadrics[2].surface.scale_y2kzbl$(2.0, 2.0, 2.0);
-    this.quadrics[2].surface.translate_y2kzbl$(0.0, 1.1, 0.0);
-    this.quadrics[2].clipper.set_6yyfpw$(Quadric$Companion_getInstance().hyperbolicParaboloid);
-    this.quadrics[2].clipper.scale_y2kzbl$(-1.0, 1.0, -1.0);
-    this.quadrics[2].clipper.translate_y2kzbl$(0.0, 1.1, 0.0);
-    var array_0 = Array_0(2);
+    this.quadrics[2].surface.translate_y2kzbl$(5.0, 1.1, 5.0);
+    this.quadrics[2].clipper.set_6yyfpw$(Quadric$Companion_getInstance().none);
+    this.quadrics[2].materialIndex.set_8cqhcw$(new Float32Array([1.0]));
+    this.quadrics[3].surface.set_6yyfpw$(Quadric$Companion_getInstance().cylinder);
+    this.quadrics[3].surface.scale_y2kzbl$(2.0, 2.0, 2.0);
+    this.quadrics[3].surface.translate_y2kzbl$(-5.0, 1.1, -5.0);
+    this.quadrics[3].clipper.set_6yyfpw$(Quadric$Companion_getInstance().origoPlanesY);
+    this.quadrics[3].clipper.scale_y2kzbl$(2.0, -6.0, 2.0);
+    this.quadrics[3].materialIndex.set_8cqhcw$(new Float32Array([2.0]));
+    this.quadrics[4].surface.set_6yyfpw$(Quadric$Companion_getInstance().origoPlanesY);
+    this.quadrics[4].surface.scale_y2kzbl$(2.0, -6.0, 2.0);
+    this.quadrics[4].clipper.set_6yyfpw$(Quadric$Companion_getInstance().cylinder);
+    this.quadrics[4].clipper.scale_y2kzbl$(2.0, 2.0, 2.0);
+    this.quadrics[4].clipper.translate_y2kzbl$(-5.0, 1.1, -5.0);
+    this.quadrics[4].materialIndex.set_8cqhcw$(new Float32Array([2.0]));
+    var array_0 = Array_0(3);
     var tmp$_0;
     tmp$_0 = array_0.length - 1 | 0;
     for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
@@ -861,9 +921,33 @@ if (typeof kotlin === 'undefined') {
     $this.storage[1] = $this.storage[1] / l;
     $this.storage[2] = $this.storage[2] / l;
     $this.storage[3] = $this.storage[3] / l;
-    this.lights[0].powerDensity.set_8cqhcw$(new Float32Array([0.0, 1.0, 0.0]));
+    this.lights[0].powerDensity.set_8cqhcw$(new Float32Array([1.0, 1.0, 1.0]));
     this.lights[1].position.set_8cqhcw$(new Float32Array([-1.0, 10.0, 1.0, 1.0]));
-    this.lights[1].powerDensity.set_8cqhcw$(new Float32Array([1.0, 0.0, 100.0]));
+    this.lights[1].powerDensity.set_8cqhcw$(new Float32Array([100.0, 100.0, 100.0]));
+    this.lights[2].position.set_8cqhcw$(new Float32Array([-1.0, 10.0, -1.0, 1.0]));
+    this.lights[2].powerDensity.set_8cqhcw$(new Float32Array([100.0, 100.0, 100.0]));
+    var array_1 = Array_0(3);
+    var tmp$_1;
+    tmp$_1 = array_1.length - 1 | 0;
+    for (var i_1 = 0; i_1 <= tmp$_1; i_1++) {
+      array_1[i_1] = new Material(i_1, Program$Companion_getInstance().all.slice());
+    }
+    this.materials = array_1;
+    this.materials[0].kd.set_8cqhcw$(new Float32Array([0.0, 0.0, 0.0]));
+    this.materials[0].ks.set_8cqhcw$(new Float32Array([1.0, 0.7, 0.0]));
+    this.materials[0].indexOfRefraction.set_8cqhcw$(new Float32Array([0.16, 0.34, 1.65]));
+    this.materials[0].extinctionCoefficient.set_8cqhcw$(new Float32Array([4.58, 2.71, 1.95]));
+    this.materials[0].shininess.set_8cqhcw$(new Float32Array([14.0]));
+    this.materials[1].kd.set_8cqhcw$(new Float32Array([0.1, 0.1, 0.1]));
+    this.materials[1].ks.set_8cqhcw$(new Float32Array([0.5, 0.5, 0.5]));
+    this.materials[1].indexOfRefraction.set_8cqhcw$(new Float32Array([1.2, 1.2, 1.2]));
+    this.materials[1].extinctionCoefficient.set_8cqhcw$(new Float32Array([1.0E-9, 1.0E-9, 1.0E-9]));
+    this.materials[1].shininess.set_8cqhcw$(new Float32Array([20.0]));
+    this.materials[2].kd.set_8cqhcw$(new Float32Array([0.0, 1.0, 0.0]));
+    this.materials[2].ks.set_8cqhcw$(new Float32Array([0.0, 0.0, 0.0]));
+    this.materials[2].indexOfRefraction.set_8cqhcw$(new Float32Array([0.16, 0.34, 1.65]));
+    this.materials[2].extinctionCoefficient.set_8cqhcw$(new Float32Array([4.58, 2.71, 1.95]));
+    this.materials[2].shininess.set_8cqhcw$(new Float32Array([1.0]));
     this.envTexture = new TextureCube(this.gl, ['media/posx.jpg', 'media/negx.jpg', 'media/posy.jpg', 'media/negy.jpg', 'media/posz.jpg', 'media/negz.jpg']);
     this.env_4eq4ep$_0 = (new SamplerCube()).provideDelegate_hr34ju$(this, Scene$env_metadata);
     this.env.set_xwoe53$(this.envTexture, []);
@@ -888,7 +972,7 @@ if (typeof kotlin === 'undefined') {
     gl.clearColor(0.7, 0.0, 0.3, 1.0);
     gl.clearDepth(1.0);
     gl.clear(WebGLRenderingContext.COLOR_BUFFER_BIT | WebGLRenderingContext.DEPTH_BUFFER_BIT);
-    this.traceProgram.draw_a4auz3$([this, this.camera].concat(this.quadrics, this.lights));
+    this.traceProgram.draw_a4auz3$([this, this.camera].concat(this.quadrics, this.lights, this.materials));
     this.quadGeometry.draw();
   };
   Scene.$metadata$ = {
@@ -4085,6 +4169,7 @@ if (typeof kotlin === 'undefined') {
     get: keyNames_getInstance
   });
   _.Light = Light;
+  _.Material = Material;
   $$importsForInline$$.kog = _;
   _.OrthoCamera = OrthoCamera;
   Object.defineProperty(PerspectiveCamera, 'Companion', {
